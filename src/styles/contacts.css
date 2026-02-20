@@ -16,6 +16,18 @@
   align-items: center;
 }
 
+.contacts-phone {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: var(--line-relaxed);
+  opacity: 0.95;
+}
+
+.contacts-phone a {
+  color: inherit;
+}
+
 .contacts-address,
 .contacts-hours {
   margin: 0 0 var(--space-4);

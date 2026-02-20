@@ -7,21 +7,27 @@ export function renderPricing(data) {
 
   const list = Array.isArray(data) ? data : [];
 
-  const cards = list
-    .map(
-      (p) => `
+  const cards = list.map((card) => {
+    const items = card.items || [];
+    const itemsHtml = items
+      .map(
+        (item) => `
+        <li class="price-item">
+          <span class="price-item-name">${item.name || ''}</span>
+          <span class="price-item-value">${item.price || ''}</span>
+        </li>
+        ${item.note ? `<li class="price-item-note">${item.note}</li>` : ''}`
+      )
+      .join('');
+
+    return `
     <article class="price-card">
-      <h3 class="price-title">${p.title || ''}</h3>
-      <div class="price-amount">${p.price || ''}</div>
-      <p class="price-period">${p.period || ''}</p>
-      <ul class="price-features">
-        ${(p.features || []).map((f) => `<li>${f}</li>`).join('')}
-      </ul>
-      <button type="button" class="btn btn-outline js-qr-open">${p.cta || 'Записаться'}</button>
+      <h3 class="price-title">${card.title || ''}</h3>
+      <ul class="price-items">${itemsHtml}</ul>
+      <button type="button" class="btn btn-outline js-qr-open">${card.cta || 'Записаться'}</button>
     </article>
-  `
-    )
-    .join('');
+  `;
+  });
 
   section.innerHTML = `
     <div class="container">
@@ -29,7 +35,7 @@ export function renderPricing(data) {
         <h2 class="section-title">Цены</h2>
         <p class="section-subtitle">Просто и доступно.</p>
       </div>
-      <div class="pricing-grid">${cards}</div>
+      <div class="pricing-grid">${cards.join('')}</div>
     </div>
   `;
 
