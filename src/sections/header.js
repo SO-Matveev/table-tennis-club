@@ -1,10 +1,15 @@
+import logoImage from '../images/logo.png';
+
 export function renderHeader(data) {
   const header = document.createElement('header');
   header.className = 'site-header';
 
   header.innerHTML = `
     <div class="container header-inner">
-      <a href="#" class="logo">${data.title}</a>
+      <a href="#" class="logo">
+        <img src="${logoImage}" alt="" class="logo-img" />
+        <span class="logo-text">${data.title}</span>
+      </a>
       <button type="button" class="nav-toggle" aria-label="Меню">
         <span></span><span></span><span></span>
       </button>
