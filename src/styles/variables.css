@@ -1,0 +1,56 @@
+/* Design tokens (маркеры дизайна) */
+:root {
+  /* Цвета — вдохновлено зелёной темой референса */
+  --color-primary: #2d5a4a;
+  --color-primary-light: #3d7a64;
+  --color-primary-dark: #1e3d32;
+  --color-accent: #4a9d7a;
+  --color-bg: #f8faf9;
+  --color-bg-alt: #eef4f1;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #5a5a5a;
+  --color-text-on-primary: #ffffff;
+  --color-border: #e0e8e4;
+
+  /* Типографика */
+  --font-heading: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3rem;
+  --text-hero: clamp(2.5rem, 6vw, 4.5rem);
+  --line-tight: 1.2;
+  --line-normal: 1.5;
+  --line-relaxed: 1.65;
+
+  /* Интервалы */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --section-padding-y: var(--space-20);
+  --section-padding-y-mobile: var(--space-12);
+
+  /* Остальное */
+  --container-max: 1200px;
+  --container-padding: var(--space-6);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --transition: 0.2s ease;
+}

@@ -1,0 +1,37 @@
+/* About */
+.about {
+  padding: var(--section-padding-y) 0;
+  background: var(--color-surface);
+}
+
+.about-header {
+  margin-bottom: var(--space-10);
+}
+
+.about-header .section-title {
+  margin-bottom: 0;
+}
+
+.about-body {
+  max-width: 720px;
+}
+
+.about-lead {
+  margin: 0 0 var(--space-6);
+  font-size: var(--text-lg);
+  line-height: var(--line-relaxed);
+  color: var(--color-text);
+}
+
+.about-text {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: var(--line-relaxed);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: var(--section-padding-y-mobile) 0;
+  }
+}
