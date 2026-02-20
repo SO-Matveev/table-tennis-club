@@ -1,17 +1,17 @@
 /* Design tokens (маркеры дизайна) */
 :root {
-  /* Цвета — вдохновлено зелёной темой референса */
-  --color-primary: #2d5a4a;
-  --color-primary-light: #3d7a64;
-  --color-primary-dark: #1e3d32;
-  --color-accent: #4a9d7a;
-  --color-bg: #f8faf9;
-  --color-bg-alt: #eef4f1;
+  /* Цвета — серые тона под логотип */
+  --color-primary: #A4A09F;
+  --color-primary-light: #b5b1b0;
+  --color-primary-dark: #8f8b8a;
+  --color-accent: #A4A09F;
+  --color-bg: #f5f5f4;
+  --color-bg-alt: #A4A09F;
   --color-surface: #ffffff;
-  --color-text: #1a1a1a;
-  --color-text-muted: #5a5a5a;
+  --color-text: #6A6969;
+  --color-text-muted: #6A6969;
   --color-text-on-primary: #ffffff;
-  --color-border: #e0e8e4;
+  --color-border: #d4d2d1;
 
   /* Типографика */
   --font-heading: "DM Sans", system-ui, -apple-system, sans-serif;
