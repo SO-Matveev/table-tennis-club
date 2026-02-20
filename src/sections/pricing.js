@@ -1,3 +1,5 @@
+import { openQrModal } from './qr.js';
+
 export function renderPricing(data) {
   const section = document.createElement('section');
   section.className = 'pricing';
@@ -15,7 +17,7 @@ export function renderPricing(data) {
       <ul class="price-features">
         ${(p.features || []).map((f) => `<li>${f}</li>`).join('')}
       </ul>
-      <a href="#contacts" class="btn btn-outline">${p.cta || 'Записаться'}</a>
+      <button type="button" class="btn btn-outline js-qr-open">${p.cta || 'Записаться'}</button>
     </article>
   `
     )
@@ -30,6 +32,10 @@ export function renderPricing(data) {
       <div class="pricing-grid">${cards}</div>
     </div>
   `;
+
+  section.querySelectorAll('.js-qr-open').forEach((btn) => {
+    btn.addEventListener('click', openQrModal);
+  });
 
   return section;
 }
