@@ -58,7 +58,6 @@
 }
 
 .qr-modal-title {
-  margin: 0 0 var(--space-6);
   font-family: var(--font-heading);
   font-size: var(--text-lg);
   font-weight: 600;
