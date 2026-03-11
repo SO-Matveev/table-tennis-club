@@ -9,6 +9,7 @@ import { renderPricing } from './sections/pricing';
 import { renderGallery } from './sections/gallery';
 import { renderReviews } from './sections/reviews';
 import { renderContacts } from './sections/contacts';
+import { initCoockies, renderCoockies } from './components/coockies';
 
 const app = document.getElementById('app');
 
@@ -20,5 +21,8 @@ app.append(
   renderPricing(content.pricing),
   renderGallery(content.gallery),
   renderReviews(content.reviews),
-  renderContacts(content.contacts)
+  renderContacts(content.contacts),
+  renderCoockies(content.coockies)
 );
+
+initCoockies();
