@@ -24,10 +24,11 @@ export function renderPricing(data) {
     <article class="price-card">
       <h3 class="price-title">${card.title || ''}</h3>
       <ul class="price-items">${itemsHtml}</ul>
-      <button type="button" class="btn btn-outline js-qr-open">${card.cta || 'Записаться'}</button>
     </article>
   `;
   });
+
+  const ctaLabel = list.find((card) => card?.cta)?.cta || 'Записаться';
 
   section.innerHTML = `
     <div class="container">
@@ -36,6 +37,9 @@ export function renderPricing(data) {
         <p class="section-subtitle">Просто и доступно.</p>
       </div>
       <div class="pricing-grid">${cards.join('')}</div>
+      <div class="pricing-cta">
+        <button type="button" class="btn btn-outline js-qr-open">${ctaLabel}</button>
+      </div>
     </div>
   `;
 
