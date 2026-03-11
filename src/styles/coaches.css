@@ -13,26 +13,28 @@
 
 .coaches-arrow {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  font-size: 2rem;
-  line-height: 1;
-  color: var(--color-text);
-  background: var(--color-surface);
-  border: 2px solid var(--color-border);
-  border-radius: 50%;
+  font-size: 4.8rem;
+  font-weight: 900;
+  line-height: 0;
+  color: #000;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  transition: color var(--transition), background-color var(--transition), border-color var(--transition);
+  opacity: 0.72;
+  transition: opacity var(--transition);
+}
+
+.coaches-arrow > span {
+  display: block;
+  line-height: 1;
 }
 
 .coaches-arrow:hover {
-  color: var(--color-primary);
-  background: var(--color-bg-alt);
-  border-color: var(--color-primary);
+  opacity: 1;
 }
 
 .coaches-viewport {
@@ -46,6 +48,9 @@
   display: flex;
   gap: var(--space-8);
   will-change: transform;
+  align-items: stretch;
+  padding: var(--space-4) 0;
+  transform-style: preserve-3d;
 }
 
 .coaches-track .coach-card {
@@ -58,11 +63,28 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: transform var(--transition);
+  transform-origin: center;
+  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+  opacity: 0.72;
+  filter: saturate(0.8);
 }
 
-.coach-card:hover {
-  transform: translateY(-4px);
+.coach-card[data-current] {
+  transform: scale(1.04);
+  opacity: 1;
+  filter: none;
+}
+
+.coach-card[data-previous] {
+  transform: perspective(900px) rotateY(8deg) scale(0.96);
+}
+
+.coach-card[data-next] {
+  transform: perspective(900px) rotateY(-8deg) scale(0.96);
+}
+
+.coach-card[data-current]:hover {
+  transform: scale(1.04) translateY(-4px);
 }
 
 .coach-photo {
@@ -110,16 +132,31 @@
   }
 
   .coaches-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
+    font-size: 4rem;
+  }
+
+  .coach-card[data-previous],
+  .coach-card[data-next] {
+    transform: none;
+  }
+
+  .coach-card[data-current] {
+    transform: scale(1.01);
   }
 }
 
 @media (max-width: 480px) {
   .coaches-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 1.25rem;
+    font-size: 3.5rem;
+  }
+
+  .coaches-track {
+    padding: var(--space-2) 0;
+  }
+
+  .coach-card {
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 }

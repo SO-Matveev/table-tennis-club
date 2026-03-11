@@ -1,3 +1,5 @@
+import { initSlider } from '../components/slider';
+
 function renderCoachCard(c) {
   return `
     <article class="coach-card">
@@ -16,9 +18,13 @@ export function renderCoaches(data) {
   section.className = 'coaches';
   section.id = 'coaches';
 
-  const list = Array.isArray(data) ? data : [];
-  const duplicated = [...list, ...list];
-  const cardsHtml = duplicated.map(renderCoachCard).join('');
+  const source = Array.isArray(data) ? data : [];
+  const list = [...source].sort((a, b) => {
+    const orderA = Number.isFinite(Number(a?.order)) ? Number(a.order) : Number.MAX_SAFE_INTEGER;
+    const orderB = Number.isFinite(Number(b?.order)) ? Number(b.order) : Number.MAX_SAFE_INTEGER;
+    return orderA - orderB;
+  });
+  const cardsHtml = list.map(renderCoachCard).join('');
 
   section.innerHTML = `
     <div class="container">
@@ -43,81 +49,20 @@ export function renderCoaches(data) {
 
   if (list.length === 0) return section;
 
-  const viewport = section.querySelector('.coaches-viewport');
-  const track = section.querySelector('.coaches-track');
-  const prevBtn = section.querySelector('.coaches-arrow-prev');
-  const nextBtn = section.querySelector('.coaches-arrow-next');
-  const gap = 32;
-  let currentIndex = 0;
-
-  function getVisibleCount() {
-    const w = viewport.getBoundingClientRect().width;
-    if (w < 400) return 1;
-    if (w < 768) return 2;
-    return 3;
-  }
-
-  function updateSlideWidth() {
-    const n = getVisibleCount();
-    const w = viewport.offsetWidth;
-    const slideW = w && n ? (w - (n - 1) * gap) / n : 280;
-    viewport.style.setProperty('--coach-slide-width', `${slideW}px`);
-  }
-
-  function getCardWidth() {
-    const n = getVisibleCount();
-    const w = viewport.offsetWidth;
-    return w && n ? (w - (n - 1) * gap) / n + gap : 312;
-  }
-
-  function applyTransform(noTransition = false) {
-    if (noTransition) track.style.transition = 'none';
-    else track.style.transition = 'transform 0.35s ease';
-    const step = getCardWidth();
-    track.style.transform = `translateX(-${currentIndex * step}px)`;
-    if (noTransition) {
-      track.offsetHeight;
-      track.style.transition = '';
+  initSlider({
+    root: section,
+    viewportSelector: '.coaches-viewport',
+    trackSelector: '.coaches-track',
+    slideSelector: '.coach-card',
+    prevSelector: '.coaches-arrow-prev',
+    nextSelector: '.coaches-arrow-next',
+    initialIndex: 0,
+    getVisibleCount(width) {
+      if (width < 400) return 1;
+      if (width < 768) return 2;
+      return 3;
     }
-  }
-
-  function goNext() {
-    currentIndex++;
-    applyTransform();
-    if (currentIndex >= list.length) {
-      track.addEventListener('transitionend', function onEnd() {
-        track.removeEventListener('transitionend', onEnd);
-        currentIndex = 0;
-        applyTransform(true);
-      }, { once: true });
-    }
-  }
-
-  function goPrev() {
-    if (currentIndex === 0) {
-      currentIndex = list.length;
-      applyTransform(true);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          currentIndex = list.length - 1;
-          applyTransform();
-        });
-      });
-    } else {
-      currentIndex--;
-      applyTransform();
-    }
-  }
-
-  prevBtn.addEventListener('click', goPrev);
-  nextBtn.addEventListener('click', goNext);
-
-  window.addEventListener('resize', () => {
-    updateSlideWidth();
-    applyTransform(true);
   });
-
-  setTimeout(updateSlideWidth, 0);
 
   return section;
 }
