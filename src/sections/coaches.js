@@ -1,9 +1,27 @@
 import { initSlider } from '../components/slider';
 
+const coachPhotoModules = import.meta.glob('../images/coaches/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  import: 'default'
+});
+
+const coachPhotoMap = Object.entries(coachPhotoModules).reduce((acc, [path, url]) => {
+  const fileName = path.split('/').pop();
+  if (fileName) acc[fileName] = url;
+  return acc;
+}, {});
+
+function resolveCoachPhoto(photoPath) {
+  if (!photoPath) return '';
+  const fileName = photoPath.split('/').pop();
+  return coachPhotoMap[fileName] || photoPath;
+}
+
 function renderCoachCard(c) {
+  const photoUrl = resolveCoachPhoto(c.photo);
   return `
     <article class="coach-card">
-      <div class="coach-photo" style="${c.photo ? `background-image: url(${c.photo})` : ''}"></div>
+      <div class="coach-photo" style="${photoUrl ? `background-image: url(${photoUrl})` : ''}"></div>
       <div class="coach-info">
         <span class="coach-role">${c.role || ''}</span>
         <h4 class="coach-name">${c.name || ''}</h4>
